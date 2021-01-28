@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import DatePicker, { CalendarContainer } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function Calendar({ receiveDateFilter }) {
+export default function MergedCalendar({ receiveDateFilter }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const onChange = (dates) => {
@@ -91,15 +91,5 @@ export default function Calendar({ receiveDateFilter }) {
       formatWeekDay={nameOfDay => nameOfDay.substr(0,3)}
       />
       </div>
-    // <DatePicker
-    //   selected={startDate}
-    //   onChange={onChange}
-    //   startDate={startDate}
-    //   endDate={endDate}
-    //   selectsRange
-    //   inline
-    //   calendarContainer={MyContainer}
-    //   customInput={<ExampleCustomInput />}
-    // />
   );
 }

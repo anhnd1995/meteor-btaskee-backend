@@ -22,7 +22,6 @@ import Register from "../views/examples/Register.js";
 import Login from "../views/examples/Login.js";
 import Tables from "../views/examples/Tables.js";
 import Icons from "../views/examples/Icons.js";
-import Calendar from "../components/Calendar/Calendar";
 
 import {
   faTasks,
@@ -144,7 +143,7 @@ var routes = [
     path: "/user-profile",
     name: "Service",
     icon: faInfoCircle,
-    component: Calendar,
+    component: Tables,
     layout: "/admin",
   },
   {

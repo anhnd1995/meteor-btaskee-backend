@@ -59,7 +59,7 @@ import { faAngleUp, faAngleDown, faSearch, faAngleRight } from "@fortawesome/fre
 import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons";
 
 // Import components
-import Calendar from "../../components/Calendar/Calendar";
+import MergedCalendar from "../../components/Calendar/MergedCalendar";
 import Rating from "../../components/Rating/Rating";
 import useOuterClick from "../../utils/customHooks/useOuterClick";
 import { Link } from "react-router-dom";
@@ -408,7 +408,7 @@ export default function Tables() {
                 <FontAwesomeIcon icon={faCalendarAlt} onClick={handleToggleCalendar}/>
                 {toggleCalendar ? (
                   <div ref={calendarRef}>
-                    <Calendar receiveDateFilter={receiveDateFilter} />
+                    <MergedCalendar receiveDateFilter={receiveDateFilter} />
                   </div>
                 ) : (
                     ""
