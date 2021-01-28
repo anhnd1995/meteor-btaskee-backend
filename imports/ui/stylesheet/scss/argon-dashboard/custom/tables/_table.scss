@@ -1,0 +1,172 @@
+//
+// Table
+//
+
+// General styles
+
+.table {
+    color: $gray-600;
+    position: relative;
+    thead th {
+        padding-top: $table-head-spacer-y;
+        padding-bottom: $table-head-spacer-y;
+        font-size: $table-head-font-size;
+        text-transform: $table-head-text-transform;
+        letter-spacing: $table-head-letter-spacing;
+        border-bottom: $table-border-width solid $table-border-color;
+        position: sticky;
+        top: 0;
+    }
+
+    th {
+        font-weight: $table-head-font-weight;
+    }
+
+    td {
+        .progress {
+            height: 3px;
+            width: 120px;
+            margin: 0;
+        }
+    }
+
+    td,
+    th {
+        font-size: $table-body-font-size;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+
+    // Vetical align table content
+
+    &.align-items-center {
+        td,
+        th {
+            vertical-align: middle;
+        }
+    }
+
+    // Styles for dark table
+
+    .thead-dark {
+        th {
+            background-color: $table-dark-head-bg;
+            color: $table-dark-head-color;
+        }
+    }
+
+    // Styles for light table
+
+    .thead-light {
+        th {
+            background-color: $table-head-bg;
+            color: $table-head-color;
+            text-transform: none;
+            font-size: 1rem;
+
+            i {
+                padding: 0 0.5rem;
+            }
+        }
+    }
+}
+
+// Add transition for hover state
+
+.table-hover {
+    tr {
+        @include transition($transition-base);
+    }
+}
+
+// Flush tables
+
+.table-flush {
+    td,
+    th {
+        border-left: 0;
+        border-right: 0;
+    }
+
+    tbody {
+        tr {
+            &:first-child {
+                td,
+                th {
+                    border-top: 0;
+                }
+            }
+
+            &:last-child {
+                td,
+                th {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+// Tables inside cards
+
+.card {
+    .table {
+        margin-bottom: 0;
+
+        td,
+        th {
+            padding-left: $card-spacer-x;
+            padding-right: $card-spacer-x;
+        }
+    }
+}
+
+// bTasker table
+
+.bTasker {
+    cursor: pointer;
+    &:hover {
+        background-color: $gray-100;
+    }
+    p {
+        margin: 0;
+    }
+    &__name {
+        display: flex;
+        align-items: center;
+        .avatar {
+            position: absolute;
+        }
+        .name-rating {
+            padding-left: 4rem;
+            p {
+                font-weight: 600;
+            }
+        }
+    }
+    &__status {
+        font-weight: 500;
+        svg {
+            width: 0.3125rem;
+            height: 0.3125rem;
+            margin-bottom: 3px;
+        }
+    }
+    &__id {
+        max-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.table-wrapper {
+    padding-top: 8rem;
+
+    @media screen and (max-width: 769px) {
+        padding-top: 5rem;
+    }
+    @media screen and (max-width: 426px) {
+        padding-top: 2rem;
+    }
+}
