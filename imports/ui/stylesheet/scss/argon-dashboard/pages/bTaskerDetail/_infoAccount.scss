@@ -1,0 +1,305 @@
+// Style for Account tab
+.info__account {
+    &-body {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        margin-top: 2rem;
+        margin-bottom: 8rem;
+        > div {
+            width: 30%;
+        }
+    }
+
+    .card {
+        &-body {
+            border-top: 2px solid $gray-300;
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+    .option__card {
+        .card-body {
+            .option__item {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+                &-header {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .service-modal {
+                        .option {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                        }
+                    }
+
+                    .location-modal {
+                        .home-city {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            background-color: #f3f3f3;
+                            position: absolute;
+                            width: 100%;
+                            left: 0;
+                            top: 0;
+                            padding: 1rem;
+                            font-weight: bold;
+                        }
+
+                        .option {
+                            display: flex;
+                            flex-wrap: wrap;
+                            margin-top: 2rem;
+                            label {
+                                width: 11rem;
+                                margin: 1rem 1rem;
+                            }
+                        }
+                    }
+                    p {
+                        margin: 0;
+                    }
+
+                    svg {
+                        font-size: 1.8rem;
+                        color: $primary;
+                        cursor: pointer;
+
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .status__card {
+        height: 16rem;
+        .card-body {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            i {
+                text-align: right;
+                display: block;
+            }
+
+            .status {
+                top: 75%;
+                transform: translate(-50%, -75%);
+            }
+
+            .pop-up {
+                bottom: 1rem;
+                .modal.show .modal-dialog {
+                    transform: translate(194%, 134%);
+                    margin: 0;
+                }
+                .modal.fade .modal-dialog {
+                    transform: translate(194%, 134%);
+                }
+
+                .modal-content {
+                    width: 20rem;
+                }
+
+                @media screen and (max-width: 1300px) {
+                    .modal.show .modal-dialog {
+                        transform: translate(142%, 116%);
+                    }
+                    .modal.fade .modal-dialog {
+                        transform: translate(142%, 116%);
+                    }
+                }
+                @media screen and (max-width: 1300px) {
+                    .modal.show .modal-dialog {
+                        transform: translate(142%, 116%);
+                    }
+                    .modal.fade .modal-dialog {
+                        transform: translate(142%, 116%);
+                    }
+                }
+            }
+        }
+    }
+
+    .finance__card {
+        &-item {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+
+            p {
+                margin-bottom: 0.5rem;
+            }
+            b {
+                font-size: 1.5rem;
+            }
+        }
+
+        hr {
+            margin: 1rem 0;
+        }
+
+        .card-footer {
+            background-color: #eae8e8;
+            text-align: right;
+            a {
+                color: $gray-600;
+
+                &:hover {
+                    color: $primary;
+                }
+            }
+        }
+    }
+
+    .transaction {
+        .modal-dialog {
+            max-width: 80%;
+
+            .modal-content {
+                width: 60%;
+                margin: 0 auto;
+                .modal-header {
+                    border-bottom: none;
+                    h3 {
+                        color: $gray-700;
+                    }
+                }
+                .transaction__filter {
+                    p {
+                        font-weight: bold;
+                        color: $gray-700;
+                        margin: 0;
+                        padding: 0.5rem 0;
+                    }
+                    .react-datepicker-wrapper {
+                        width: 9rem;
+                        .react-datepicker__input-container {
+                            .seperate-input {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                                padding: 0 0.9rem;
+                                border-radius: 1rem;
+                                width: 100%;
+                                border: 1px solid $gray-300;
+                                background-color: $white;
+                                color: $gray-600;
+                            }
+                        }
+                    }
+                    .react-datepicker__tab-loop {
+                        position: absolute;
+
+                        .react-datepicker__navigation {
+                            top: 12px !important;
+                        }
+                    }
+
+                    .select__account {
+                        .transaction__dropdown {
+                            &-current {
+                                cursor: pointer;
+                                width: 80%;
+                            }
+                            &-option {
+                                z-index: 1;
+                                transform: translate(-11%, 40%);
+                                padding: 1rem 0;
+                                border-radius: 10px;
+                                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                                width: 100%;
+                                p {
+                                    padding-left: 1rem;
+                                    padding-right: 1rem;
+                                    background-color: $white;
+                                    &:hover {
+                                        background-color: $gray-200;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .search-btn {
+                        button {
+                            width: 100%;
+                            border-radius: 20px;
+                        }
+                    }
+                }
+
+                .modal-body {
+                    margin-top: 1rem;
+                    background-color: $gray-100;
+
+                    .transaction__summary {
+                        p {
+                            font-weight: bold;
+                            color: $gray-500;
+                            padding-right: 2rem;
+
+                            span {
+                                color: #898989;
+                            }
+                        }
+                    }
+                    .transaction__table {
+                        background-color: $white;
+                        height: 60vh;
+                        overflow: auto;
+                        table {
+                            height: 50vh;
+                            thead {
+                                th {
+                                    border-top: none;
+                                    text-transform: none;
+                                    font-size: 1rem;
+                                    background-color: $white;
+                                }
+                                th:first-of-type {
+                                    width: 7rem;
+                                }
+                            }
+                            tbody{
+                                td{
+                                    white-space: break-spaces;
+                                    vertical-align: middle;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        &-body {
+            flex-direction: column;
+            margin-bottom: 2rem;
+            > div {
+                width: 92%;
+                margin: 1rem;
+            }
+        }
+
+        .status__card {
+            .card-body {
+            }
+
+            .status {
+                top: 70%;
+                transform: translate(-50%, -70%);
+            }
+        }
+    }
+}

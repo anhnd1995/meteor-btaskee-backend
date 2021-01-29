@@ -1,30 +1,42 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker, { CalendarContainer } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-regular-svg-icons";
+
 
 export default function SeperateCalendar() {
-  const [date, setDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-  const onChange = (dates) => {
-    const [start, end = startDate] = dates;
-    setStartDate(start);
-    setEndDate(end);
-    
-  };
-    
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
-  const CustomInput = ({ value, onClick }) => (
-    <button className="example-custom-input" onClick={onClick}></button>
+  const InputCalendarIcon = ({ value, onClick }) => (
+    <button className="seperate-input" onClick={onClick}>
+      {value}
+      <FontAwesomeIcon icon={faCalendarAlt} />
+    </button>
   );
 
   return (
-    <div onClick={(e) => { e.stopPropagation(); }}><DatePicker selected={startDate}
-      onChange={onChange}
-      startDate={startDate}
-      endDate={endDate}
-      customInput={<CustomInput />}
-      formatWeekDay={nameOfDay => nameOfDay.substr(0,3)}
+    <div className="d-flex justify-content-between align-items-center">
+      <p>Beginning</p>
+      <DatePicker
+        selected={startDate}
+        onChange={date => setStartDate(date)}
+        selectsStart
+        startDate={startDate}
+        endDate={endDate}
+        customInput={<InputCalendarIcon />}
       />
-      </div>
+      <p>Ending</p>
+      <DatePicker
+        selected={endDate}
+        onChange={date => setEndDate(date)}
+        selectsEnd
+        startDate={startDate}
+        endDate={endDate}
+        minDate={startDate}
+        customInput={<InputCalendarIcon />}
+      />
+    </div>
   );
 }
