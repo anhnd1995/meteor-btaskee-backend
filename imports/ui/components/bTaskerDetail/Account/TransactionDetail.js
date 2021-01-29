@@ -13,7 +13,8 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import transaction from '../../../data/transaction'
 
 // Import utils
-import changeDateFormat from '../../../utils/changeDateFormat'
+import changeCurrencyFormat from '../../../utils/changeCurrencyFormat'
+import FormatDate from '../../FormatDate/FormatDate';
 
 export default function TransactionDetail() {
 
@@ -22,15 +23,16 @@ export default function TransactionDetail() {
     const [dropDownOption, setDropDownOption] = useState(["All", "Main Account", "2nd Account"])
     const [transactionData, setTransactionData] = useState([...transaction])
     const [account, setAccount] = useState("All")
-    const toggle = () => setDropdownOpen(prevState => !prevState);
+    const [mainAcc, setMainAcc] = useState(0);
+    const [secondAcc, setSecondAcc] = useState(0);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
-
-
-    const formatCurrency = (num) => {
-        let currency = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const renderCurrency = (num) => {
+        let currency = changeCurrencyFormat(num);
         if (num > 0) {
             return <td className="text-green">+ {currency} VND</td>
-        } 
+        }
         else if (num < 0) {
             return <td className="text-red">{currency} VND</td>
         }
@@ -40,30 +42,24 @@ export default function TransactionDetail() {
     }
 
 
-    // Render created date 
-  const renderCreatedDate = (date) => {
-    const [getDate, getTime] = changeDateFormat(date);
-    return (
-      <td className="bTasker__created-date">
-        <p className="font-weight-bold mb-0">{getDate}</p>
-        <p className="font-weight-bold mb-0">{getTime}</p>
-      </td>
-    )
-  }
-
     const renderTransactionTable = () => {
 
         return transactionData.map((item, index) => {
             return (
                 <tr key={item.transaction_id}>
                     <td>{index + 1}</td>
-                    {formatCurrency(item.main_account)}
-                    {formatCurrency(item.second_account)}
+                    {renderCurrency(item.main_account)}
+                    {renderCurrency(item.second_account)}
                     <td>{item.reason}</td>
-                    {renderCreatedDate(item.createAt)}
+                    <FormatDate date={item.createAt} />
                 </tr>
             )
         })
+    }
+
+    const calulateAccount = (transaction, account) => {
+        let sum = transaction.reduce((total, item) => total + item[account], 0)
+        return sum;
     }
 
     // Handle select account event
@@ -71,6 +67,22 @@ export default function TransactionDetail() {
         let selected = e.target.textContent;
         let newDropDown = dropDownOption.filter((item) => item !== selected)
         setDropDownOption([selected, ...newDropDown]);
+    }
+
+    // Receive start/ end date from Calendar component
+    const receiveDateFilter = (startDate, endDate) => {
+        // filterByDate(startDate, endDate);
+        setStartDate(startDate);
+        setEndDate(endDate);
+        // console.log(startDate, endDate);
+    };
+
+    // Handle Filter event
+    const handleFilter = () => {
+        let filteredData = transactionData.filter((item) => {
+            let createdDate = new Date(item.createAt.slice(0, 19));
+            return createdDate >= startDate && createdDate <= endDate;
+        });
     }
 
     const Dropdown = () => {
@@ -108,20 +120,20 @@ export default function TransactionDetail() {
                     </div>
                     <div className="transaction__filter row px-4 mt-4">
                         <div className="calendar-select col-md-7">
-                            <SeperateCalendar />
+                            <SeperateCalendar receiveDateFilter={receiveDateFilter} />
                         </div>
                         <div className="select__account col-md-3">
                             <Dropdown />
                         </div>
                         <div className="col-md-2 search-btn pl-0">
-                            <button type="button" className="btn btn-primary">Search</button>
+                            <button type="button" className="btn btn-primary" onClick={handleFilter}>Search</button>
                         </div>
 
                     </div>
                     <div className="modal-body">
                         <div className="transaction__summary d-flex">
-                            <p>Main Account: <span>- 15,700 VND</span></p>
-                            <p>2nd Account: <span> 350,700 VND</span></p>
+                            <p>Main Account: <span>{changeCurrencyFormat(calulateAccount(transaction, "main_account"))}</span></p>
+                            <p>2nd Account: <span> {changeCurrencyFormat(calulateAccount(transaction, "second_account"))}</span></p>
                         </div>
                         <div className="transaction__table">
                             <Table className="text-left table-flush">

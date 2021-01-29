@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-regular-svg-icons";
 
 
-export default function SeperateCalendar() {
+export default function SeperateCalendar({ receiveDateFilter }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -16,12 +16,14 @@ export default function SeperateCalendar() {
     </button>
   );
 
+
+
   return (
     <div className="d-flex justify-content-between align-items-center">
       <p>Beginning</p>
       <DatePicker
         selected={startDate}
-        onChange={date => setStartDate(date)}
+        onChange={date => {setStartDate(date);receiveDateFilter(startDate,endDate)}}
         selectsStart
         startDate={startDate}
         endDate={endDate}
@@ -30,7 +32,7 @@ export default function SeperateCalendar() {
       <p>Ending</p>
       <DatePicker
         selected={endDate}
-        onChange={date => setEndDate(date)}
+        onChange={date => {setEndDate(date);receiveDateFilter(startDate,endDate)}}
         selectsEnd
         startDate={startDate}
         endDate={endDate}

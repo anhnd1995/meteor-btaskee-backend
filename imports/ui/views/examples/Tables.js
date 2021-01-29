@@ -51,7 +51,6 @@ import { useHistory, useLocation } from "react-router-dom";
 
 //Import custom hook
 import useViewport from '../../utils/customHooks/useViewport'
-import changeDateFormat from '../../utils/changeDateFormat'
 
 // Import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -64,6 +63,7 @@ import Rating from "../../components/Rating/Rating";
 import useOuterClick from "../../utils/customHooks/useOuterClick";
 import { Link } from "react-router-dom";
 import Status from "../../components/Status/Status";
+import FormatDate from "../../components/FormatDate/FormatDate";
 
 export default function Tables() {
   // State variables
@@ -223,18 +223,6 @@ export default function Tables() {
     ));
   };
 
-
-  // Render created date 
-  const renderCreatedDate = (date) => {
-    const [getDate, getTime] = changeDateFormat(date);
-    return (
-      <td className="bTasker__created-date">
-        <p className="font-weight-bold">{getDate}</p>
-        <p className="font-weight-bold">{getTime}</p>
-      </td>
-    )
-  }
-
   // Rendering data to tables
   const renderTableContent = (user) => {
     return user.map((row) => {
@@ -251,7 +239,7 @@ export default function Tables() {
             <td className="bTasker__service">{row.service}</td>
             <Status status={row.status} width={width} breakpoint={breakpoint} />
             <td className="bTasker__id">{row.id}</td>
-            {renderCreatedDate(row.createAt)}
+            <FormatDate date={row.createAt} />
             <td className="bTasker__referal-code">{row.referalCode}</td>
             <td className="bTasker__friend-code">{row.friendCode}</td>
           </tr>
